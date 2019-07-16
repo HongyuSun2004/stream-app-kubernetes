@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schema-registry-deployment
+  labels:
+    app: wh-stream-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: schema-registry-pod
+      app: wh-stream-app
+  template:
+    metadata:
+      name: schema-registry-pod
+      labels:
+        name: schema-registry-pod
+        app: wh-stream-app
+
+    spec:
+      containers:
+      - name: schema-registry
+        image: confluentinc/cp-schema-registry:5.2.2
+        ports:
+        - containerPort: 8081
+
+
